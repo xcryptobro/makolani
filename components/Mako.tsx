@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Box, Text } from '@chakra-ui/react'
 import Web3 from 'web3'
 import { AbiItem } from 'web3-utils'
 import { useWallet } from 'use-wallet'
@@ -25,9 +26,11 @@ const Mako = () => {
   }, [wallet, web3])
 
   return (
-    <div>
-      <p>Balance: {TokenAmount.format(balance, 18, { symbol: 'MAKO' })}</p>
-    </div>
+    <Box>
+      <Text mt='4' fontSize='lg'>
+        {TokenAmount.format(balance, 18, { symbol: 'MAKO' })}
+      </Text>
+    </Box>
   )
 }
 

@@ -22,15 +22,11 @@ const Home = () => {
           Welcome to Makolani
         </Heading>
         <Text mt='4' fontSize='lg'>
-          Our community is learning about crypto and DeFi on!
+          Our community is learning about crypto and DeFi on Polygon!
         </Text>
         {wallet.status === 'connected' ? (
           <Box>
             <Text mt='4' fontSize='lg'>
-              Account: {wallet.account}
-            </Text>
-            <Text mt='4' fontSize='lg'>
-              Balance:{' '}
               {TokenAmount.format(wallet.balance, 18, { symbol: 'MATIC' })}
             </Text>
             <Mako />
