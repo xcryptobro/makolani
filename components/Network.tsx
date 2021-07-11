@@ -7,7 +7,7 @@ const Network = () => {
 
   return wallet.status !== 'connectd' || wallet.chainId !== 137 ? null : (
     <div>
-      <Image src='/ui/polygon.svg' width={102.4} height={22.4} />
+      <Image src='/ui/polygon.svg' width={102.4} height={22.4} alt='Polygon' />
     </div>
   )
 }

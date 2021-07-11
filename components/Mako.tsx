@@ -22,7 +22,7 @@ const Mako = () => {
       setBalance(balance)
     }
     getBalance()
-  }, [])
+  }, [wallet, web3])
 
   return (
     <div>
