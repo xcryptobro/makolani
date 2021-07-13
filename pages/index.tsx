@@ -10,7 +10,7 @@ const Home = () => {
   const blockNumber = wallet.getBlockNumber()
 
   return (
-    <Box as='section'>
+    <Box as='section' backgroundColor='#fefefe'>
       <Header />
       <Box
         maxW='2xl'
@@ -54,7 +54,7 @@ const Home = () => {
           </Button>
         )}
         <Box>
-          <Image src='/mako.png' alt='MAKO Token' width={200} height={200} />
+          <Image src='/mako.svg' alt='MAKO Token' width={200} height={200} />
         </Box>
         {wallet.connected && (
           <Text mt='4' fontSize='lg'>
