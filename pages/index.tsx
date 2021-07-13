@@ -25,10 +25,25 @@ const Home = () => {
           Our community is learning about crypto and DeFi on Polygon!
         </Text>
         {wallet.status === 'connected' ? (
-          <Box>
-            <Text mt='4' fontSize='lg'>
-              {TokenAmount.format(wallet.balance, 18, { symbol: 'MATIC' })}
-            </Text>
+          <>
+            <Box
+              display='flex'
+              justifyContent='center'
+              alignItems='center'
+              my={4}>
+              <Text fontSize='lg'>
+                {TokenAmount.format(wallet.balance, 18)}
+              </Text>
+              <Box p={2}>
+                <Image
+                  src='/tokens/matic.svg'
+                  width={40}
+                  height={40}
+                  alt='MATIC'
+                />
+              </Box>
+              <Text fontSize='lg'>MATIC</Text>
+            </Box>
             <Mako />
             <Button
               mt='8'
@@ -40,22 +55,27 @@ const Home = () => {
               onClick={() => wallet.reset()}>
               Disconnect
             </Button>
-          </Box>
+          </>
         ) : (
-          <Button
-            mt='8'
-            as='a'
-            href='#'
-            size='lg'
-            colorScheme='pink'
-            fontWeight='bold'
-            onClick={() => wallet.connect()}>
-            Connect w/ MetaMask
-          </Button>
+          <Box display='flex' flexDirection='column'>
+            <Button
+              mt='8'
+              as='a'
+              href='#'
+              size='lg'
+              colorScheme='pink'
+              fontWeight='bold'
+              onClick={() => wallet.connect()}>
+              Connect w/ MetaMask
+            </Button>
+            <Image
+              src='/tokens/mako.svg'
+              alt='MAKO Token'
+              width={200}
+              height={200}
+            />
+          </Box>
         )}
-        <Box>
-          <Image src='/mako.svg' alt='MAKO Token' width={200} height={200} />
-        </Box>
         {wallet.connected && (
           <Text mt='4' fontSize='lg'>
             Block:{blockNumber || '…'}
