@@ -1,13 +1,16 @@
 import { Box, Button, Heading, Text } from '@chakra-ui/react'
 import { useWallet } from 'use-wallet'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import TokenAmount from 'token-amount'
 import Mako from '../components/Mako'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 const Home = () => {
+  const router = useRouter()
+  const { locale } = router
   const wallet = useWallet()
-  const blockNumber = wallet.getBlockNumber()
 
   return (
     <Box as='section' backgroundColor='#fefefe'>
@@ -22,7 +25,9 @@ const Home = () => {
           Welcome to Makolani
         </Heading>
         <Text mt='4' fontSize='lg'>
-          Our community is learning about crypto and DeFi on Polygon!
+          {locale === 'jp'
+            ? 'このコミュニティは、Polygonで暗号通貨とDeFiについて勉強しているところです。'
+            : 'Our community is learning about crypto and DeFi on Polygon!'}
         </Text>
         {wallet.status === 'connected' ? (
           <>
@@ -53,7 +58,7 @@ const Home = () => {
               colorScheme='blue'
               fontWeight='bold'
               onClick={() => wallet.reset()}>
-              Disconnect
+              {locale === 'jp' ? '接続解除' : 'Disconnect'}
             </Button>
           </>
         ) : (
@@ -66,7 +71,7 @@ const Home = () => {
               colorScheme='pink'
               fontWeight='bold'
               onClick={() => wallet.connect()}>
-              Connect w/ MetaMask
+              {locale === 'jp' ? 'MetaMaskとつながる' : 'Connect w/ MetaMask'}
             </Button>
             <Image
               src='/tokens/mako.svg'
@@ -76,12 +81,8 @@ const Home = () => {
             />
           </Box>
         )}
-        {wallet.connected && (
-          <Text mt='4' fontSize='lg'>
-            Block:{blockNumber || '…'}
-          </Text>
-        )}
       </Box>
+      <Footer />
     </Box>
   )
 }

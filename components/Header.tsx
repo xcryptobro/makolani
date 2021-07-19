@@ -1,4 +1,3 @@
-import { ReactNode } from 'react'
 import { useWallet } from 'use-wallet'
 import {
   Box,
@@ -8,38 +7,32 @@ import {
   IconButton,
   Button,
   Menu,
-  // MenuButton,
-  // MenuList,
-  // MenuItem,
-  // MenuDivider,
+  MenuButton,
   useDisclosure,
   useColorModeValue,
   Stack
 } from '@chakra-ui/react'
-import Image from 'next/image'
-import { HamburgerIcon, CloseIcon, AddIcon, MinusIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons'
 import Address from './Address'
 import Network from './Network'
+import { useRouter } from 'next/router'
 
-// const Links = ['Dashboard', 'Projects', 'Team']
+interface ILink {
+  path: string
+  en: string
+  jp: string
+}
 
-const NavLink = ({ children }: { children: ReactNode }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={'md'}
-    _hover={{
-      textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700')
-    }}
-    href={'#'}>
-    {children}
-  </Link>
-)
+const Links: ILink[] = [{ path: '/', en: 'Home', jp: 'ホーム' }]
 
 const Header = () => {
   const wallet = useWallet()
+  const { locale } = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const hoverStyle = {
+    textDecoration: 'none',
+    bg: useColorModeValue('gray.200', 'gray.700')
+  }
 
   return (
     <>
@@ -53,17 +46,22 @@ const Header = () => {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Box>
-              <Image src='/mako.png' alt='MAKO Token' width={50} height={50} />
-            </Box>
-            {/* <HStack
+            <HStack
               as={'nav'}
               spacing={4}
               display={{ base: 'none', md: 'flex' }}>
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <Link
+                  key={link.en}
+                  px={2}
+                  py={1}
+                  rounded={'md'}
+                  _hover={hoverStyle}
+                  href={link.path}>
+                  {locale === 'jp' ? link.jp : link.en}
+                </Link>
               ))}
-            </HStack> */}
+            </HStack>
           </HStack>
           <Flex alignItems={'center'}>
             <Menu>
@@ -73,7 +71,7 @@ const Header = () => {
                   <Network />
                 </>
               ) : (
-                <Button
+                <MenuButton
                   as={Button}
                   mr={4}
                   href='#'
@@ -83,8 +81,10 @@ const Header = () => {
                   colorScheme='pink'
                   leftIcon={<AddIcon />}
                   onClick={() => wallet.connect()}>
-                  Connect w/ MetaMask
-                </Button>
+                  {locale === 'jp'
+                    ? 'MetaMaskとつながる'
+                    : 'Connect w/ MetaMask'}
+                </MenuButton>
               )}
             </Menu>
           </Flex>
@@ -93,9 +93,17 @@ const Header = () => {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {/* {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))} */}
+              {Links.map((link) => (
+                <Link
+                  key={link.en}
+                  px={2}
+                  py={1}
+                  rounded={'md'}
+                  _hover={hoverStyle}
+                  href={link.path}>
+                  {locale === 'jp' ? link.jp : link.en}
+                </Link>
+              ))}
             </Stack>
           </Box>
         ) : null}
