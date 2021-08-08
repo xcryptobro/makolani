@@ -39,7 +39,7 @@ const Mako = () => {
       </Box>
       {balance > 0 && (
         <Text fontSize='lg'>
-          {locale === 'jp' ? 'やあ、HODLER' : 'Hey there hodler'} 💎🙌!
+          {locale === 'jp' ? 'Hello、HODLER' : 'Hey there hodler'} 💎🙌!
         </Text>
       )}
     </Box>
