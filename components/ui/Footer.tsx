@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { useWallet } from 'use-wallet'
 import {
   Box,
+  Button,
   Container,
   Stack,
   Text,
@@ -33,8 +34,21 @@ const Footer = () => {
         <Language />
         <Text>Built in {new Date().getFullYear()} by Makolani.</Text>
         <Text mt='4' fontSize='lg'>
-          {locale === 'jp' ? 'ブロック' : 'Block'}: {blockNumber || '…'}
+          {locale === 'jp' ? '最新版ブロック' : 'Latest Block'}:{' '}
+          {blockNumber || '…'}
         </Text>
+        {wallet.status === 'connected' && (
+          <Button
+            mt='8'
+            as='a'
+            href='#'
+            size='lg'
+            colorScheme='blue'
+            fontWeight='bold'
+            onClick={() => wallet.reset()}>
+            {locale === 'jp' ? '接続解除' : 'Disconnect'}
+          </Button>
+        )}
         <Stack direction={'row'} spacing={6}></Stack>
       </Container>
     </Box>

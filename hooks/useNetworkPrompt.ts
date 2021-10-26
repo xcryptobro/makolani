@@ -19,13 +19,13 @@ const useNetworkPrompt = () => {
       params: [
         {
           chainId: polygonChainId,
-          chainName: 'Matic(Polygon) Mainnet',
+          chainName: 'Polygon Mainnet',
           nativeCurrency: {
             name: 'Matic',
             symbol: 'MATIC',
             decimals: 18
           },
-          rpcUrls: ['https://rpc-mainnet.matic.network'],
+          rpcUrls: ['https://polygon-rpc.com'],
           blockExplorerUrls: ['https://polygonscan.com']
         }
       ]

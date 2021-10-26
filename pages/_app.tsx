@@ -2,8 +2,9 @@ import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { UseWalletProvider } from 'use-wallet'
-import theme from '../theme'
-import useNetworkPrompt from '../hooks/useNetworkPrompt'
+import theme from '@/utils/theme'
+import useNetworkPrompt from '@/hooks/useNetworkPrompt'
+import Layout from '@/components/ui/Layout'
 
 const polygonChainId = 137
 
@@ -44,7 +45,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       <ChakraProvider resetCSS theme={theme}>
         <ColorModeProvider options={{ useSystemColorMode: true }}>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </ColorModeProvider>
       </ChakraProvider>
     </UseWalletProvider>
